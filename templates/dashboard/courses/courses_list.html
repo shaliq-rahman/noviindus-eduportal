@@ -1,0 +1,132 @@
+<table class="table border text-nowrap text-md-nowrap table-hover mb-0">
+    <thead>
+      <tr>
+        <th>Sl No</th>
+        <th>Image</th>
+        <th>Title</th>
+        <th>Subtitle</th>
+        <th>Description</th>
+        <th>Details</th>
+        <th>Satus</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- TABLE DETAILS -->
+      {% for course in courses %}
+      <tr>
+        <td>{{forloop.counter}}</td>
+        <td>
+          <img class="d-block img-fluid br-5 img-td" src="{% if course.image %}{{course.image.url}}{% endif %}" alt="">
+        </td>
+        <td> {{course.title}}</td>
+        <td> {{course.subtitle}} </td>
+        <td>
+          <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#description">
+            <i class="side-menu__icon fe fe-eye text-white"></i>
+          </a>
+
+          <div class="modal  fade" id="description" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-md modal-dialog-centered text-center" role="document">
+              <div class="modal-content ">
+                <div class="modal-body">
+                  <button aria-label="Close" class="btn-close position-absolute" data-bs-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="text-primary">Description</h4>
+                  <p class="mg-b-20 mg-x-20">{{course.description}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <a class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#crsdetail">
+            <i class="side-menu__icon fe fe-list text-white"></i>
+          </a>
+
+          <div class="modal  fade" id="crsdetail" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg modal-dialog-centered text-center" role="document">
+              <div class="modal-content ">
+                <div class="modal-body">
+                  <button aria-label="Close" class="btn-close position-absolute" data-bs-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Title</td>
+                        <td>{{course.title}}</td>
+                      </tr>
+                      <tr>
+                        <td>Subtitle</td>
+                        <td>{{course.subtitle}}</td>
+                      </tr>
+                      <tr>
+                        <td>Description</td>
+                        <td>{{course.description}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="modal-footer justify-content-center">
+                  <button aria-label="Close" class="btn btn-danger pd-x-25" data-bs-dismiss="modal">Cancel</button>
+                </div>
+              </div>
+            </div>
+
+        </td>
+        <td>
+          {% if course.is_active %}
+          <a href="">
+            <span class="btn btn-success">Active</span>
+          </a>
+          {% else %}
+          <a href="">
+            <span class="btn btn-danger">Inactive</span>
+          </a>
+
+          {% endif %}
+          
+          
+        </td>
+        <td>
+          <a class=" btn btn-info" href="{% url 'dashboard:course_edit' course.id %}">
+            <i class="side-menu__icon fe fe-edit"></i>
+          </a>
+          <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modaldemo{{course.id}}">
+            <i class="side-menu__icon fe fe-trash text-white"></i>
+          </a>
+
+          <div class="modal  fade" id="modaldemo{{course.id}}" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-md modal-dialog-centered text-center" role="document">
+              <div class="modal-content ">
+                <div class="modal-body">
+                  <button aria-label="Close" class="btn-close position-absolute" data-bs-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <i class="icon icon-close fs-70 text-danger lh-1 my-5 d-inline-block"></i>
+                  <h4 class="text-danger">Are You Sure Do You Want To Delete ?</h4>
+                  <p class="mg-b-20 mg-x-20">Item Will be Deleted Permanently</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                  <a href="{% url 'dashboard:course_delete' course.id %}" class="btn btn-success">Yes</a>
+                  <button aria-label="Close" class="btn btn-danger pd-x-25" data-bs-dismiss="modal">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </td>
+      </tr>
+      {% endfor %}
+      
+      <!-- TABLE DETAILS END -->
+    </tbody>
+  </table>

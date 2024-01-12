@@ -1,0 +1,44 @@
+{% extends "dashboard/layout/base.html" %} {% load static %} {% block body_block %} 
+{% include 'dashboard/layout/header.html' %}
+<!--app-content open-->
+<div class="main-content app-content mt-0">
+  <div class="side-app">
+    <!-- CONTAINER -->
+    <div class="main-container container-fluid">
+      <!-- PAGE-HEADER -->
+      <div class="page-header">
+        <h1 class="page-title">Short Term Course View</h1>
+        <a href="{% url 'dashboard:course_create' %}" class="btn btn-danger btn-pill">Add <i class="fa fa-plus"></i>
+        </a>
+      </div>
+      <!-- PAGE-HEADER END -->
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Short Term Course Table</h3>
+            </div>
+            <div class="card-body">
+
+              <div class="table-responsive">
+                <input name='filter_courses' style='padding-bottom:10px;' id="filter_courses" class="filter_courses form-control" placeholder='Type here to filter courses' onkeyup="FilterCourse('')">
+                <div class="table-responsive" id="course_table">
+                    {% include 'dashboard/courses/courses_list.html' %}
+                  
+                </div>
+                <div class="card-body" id="course_pagination">
+                    {% include 'dashboard/courses/courses_pagination.html' %}
+                  
+                  <!-- pagination-wrapper -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- CONTAINER END -->
+    </div>
+  </div>
+  <!--app-content close-->
+
+  </div> {% include 'dashboard/layout/footer.html' %} {% endblock %}

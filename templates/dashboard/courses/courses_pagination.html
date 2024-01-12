@@ -1,0 +1,30 @@
+
+<input type="hidden" id="page" value="1" />
+<input type="hidden" id="current_page" value="{{current_page}}" />
+<input type="hidden" id="start_count" value="1" />
+
+{% if courses.has_other_pages %}
+  <ul class="pagination">
+    {% if courses.has_previous %}
+      <li class="page-item page-prev"><a class="page-link" href="?page={{ courses.previous_page_number }}">Prev</a></li>
+    {% else %}
+      <li class="page-item page-prev" class="disabled"><span></span></li>
+    {% endif %}
+
+    {% for i in courses.paginator.page_range %}
+      {% if courses.number == i %}
+        <li class="page-item active" >
+          {% comment %} <span>{{ i }} <span class="sr-only">(current)</span></span> {% endcomment %}
+          <a class="page-link" href="">{{i}}</a>
+        </li>
+      {% else %}
+        <li class="page-item "><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if courses.has_next %}
+      <li class="page-item page-next"><a class="page-link"  href="?page={{ courses.next_page_number }}">Next</a></li>
+    {% else %}
+      <li class="disabled page-item page-next"><span></span></li>
+    {% endif %}
+  </ul>
+{% endif %}
